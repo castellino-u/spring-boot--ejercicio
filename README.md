@@ -30,8 +30,8 @@ Por ejemplo, en vez de obtener una entidad `Book` completa con todos sus atribut
 
 ## 📦 Estructura del proyecto
 
-  projections-demo/
-  ├── entity/
+  projections-demo
+  ├── entity
   │ └── Book.java
   ├── projection/
   │ └── BookSummary.java

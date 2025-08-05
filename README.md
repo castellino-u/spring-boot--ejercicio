@@ -29,17 +29,18 @@ Por ejemplo, en vez de obtener una entidad `Book` completa con todos sus atribut
 ---
 
 ## 📦 Estructura del proyecto
-projections-demo/
-├── entity/
-│ └── Book.java
-├── projection/
-│ └── BookSummary.java
-├── repository/
-│ └── BookRepository.java
-├── controller/
-│ └── BookController.java
-├── ProjectionsDemoApplication.java
-└── application.properties
+
+  projections-demo/
+  ├── entity/
+  │ └── Book.java
+  ├── projection/
+  │ └── BookSummary.java
+  ├── repository/
+  │ └── BookRepository.java
+  ├── controller/
+  │ └── BookController.java
+  ├── ProjectionsDemoApplication.java
+  └── application.properties
 
 🧪 Cómo probar el proyecto
 1. Iniciar el proyecto

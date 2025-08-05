@@ -1,57 +1,90 @@
 # spring-boot--ejercicio
 Ejercicio de spring boot para las pasantías de la UTN
 
-# 📘 Spring Boot - Proyecciones (Spring Data Projections)
 
-Este es un proyecto de ejemplo construido con **Spring Boot** que implementa el patrón de **Proyecciones** utilizando **Spring Data JPA**.
+# 📘 Spring Boot - Proyecciones (Projections) Demo
 
-Las **proyecciones** permiten seleccionar solo los campos necesarios de una entidad en las consultas, mejorando el rendimiento y reduciendo la transferencia de datos innecesarios.
-
----
-
-## 🧠 ¿Qué es una Proyección?
-
-En Spring Data JPA, una **proyección** es una técnica para definir qué datos queremos recuperar de una entidad sin traerla completamente. Esto es útil cuando solo necesitamos una parte de los datos, por ejemplo para mostrar en una tabla, resumen, vista previa, etc.
-
-Por ejemplo, en vez de obtener una entidad `Book` completa con todos sus atributos, podemos crear una interfaz como `BookSummary` que solo recupere el `title`, `author` y `price`.
+Este proyecto es una demostración del uso de **proyecciones (projections)** en Spring Data JPA, creado con **Spring Boot**. Las proyecciones permiten recuperar solo partes específicas de una entidad desde la base de datos, mejorando el rendimiento y haciendo más eficientes las consultas.
 
 ---
 
-## 🧱 Tecnologías utilizadas
+## 🔍 ¿Qué son las Proyecciones en Spring?
+
+Las proyecciones permiten seleccionar solo ciertos campos de una entidad en una consulta. En lugar de traer todos los atributos del objeto, podemos elegir traer solo los necesarios usando interfaces o clases específicas.
+
+Spring soporta 3 tipos de proyecciones:
+
+1. **Proyecciones Basadas en Interfaces**: se definen con interfaces que contienen solo los getters de los campos deseados.
+2. **Proyecciones Dinámicas**: permiten seleccionar el tipo de proyección en tiempo de ejecución.
+3. **Proyecciones Basadas en Clases (DTO)**: devuelven objetos personalizados usando `new` en JPQL o construcciones específicas.
+
+---
+
+## 📦 Estructura del Proyecto
+
+- `Book`: Entidad principal con los campos `id`, `title`, `author`, `genre`, `pages`, `price`.
+- `BookRepository`: Repositorio JPA que incluye métodos usando proyecciones.
+- `BookSummary`: Interface de proyección (solo `title` y `author`).
+- `BookController`: Controlador REST que expone endpoints usando proyecciones.
+
+---
+
+## 🚀 Cómo correr el proyecto
+
+1. Cloná o descargá este repositorio.
+2. Abrí el proyecto con **IntelliJ IDEA** o tu IDE preferido.
+3. Ejecutá la clase `ProjectionsDemoApplication`.
+4. Accedé a los endpoints desde Postman o navegador.
+
+---
+
+## 📫 Endpoints disponibles
+
+### ✅ Obtener todos los libros (entidad completa)
+```http
+GET http://localhost:8080/books
+```
+
+### ✅ Obtener solo título y autor (proyección con interfaz)
+```http
+GET http://localhost:8080/summary
+```
+
+### ✅ Obtener solo título y autor paginado
+```http
+GET http://localhost:8080/summary/page?page=0&size=2
+```
+
+---
+
+## 🧪 Datos precargados (CommandLineRunner)
+
+Al iniciar la app se cargan automáticamente estos libros:
+
+- Clean Code - Robert C. Martin
+- Effective Java - Joshua Bloch
+- The Pragmatic Programmer - Andrew Hunt
+
+---
+
+## 💡 Ventajas del uso de Proyecciones
+
+- Mejor rendimiento en consultas.
+- Menor uso de memoria.
+- Códigos más claros y enfocados.
+- Útil para APIs donde no se requiere toda la información del objeto.
+
+---
+
+## 🛠 Tecnologías usadas
 
 - Java 17
 - Spring Boot 3.x
 - Spring Data JPA
 - H2 Database (en memoria)
 - Maven
-- Postman (para pruebas de API)
 
 ---
-
-## 📦 Estructura del proyecto
-
-  projections-demo
-  ├── entity
-  │ └── Book.java
-  ├── projection/
-  │ └── BookSummary.java
-  ├── repository/
-  │ └── BookRepository.java
-  ├── controller/
-  │ └── BookController.java
-  ├── ProjectionsDemoApplication.java
-  └── application.properties
-
-🧪 Cómo probar el proyecto
-1. Iniciar el proyecto
-Abrí el proyecto en IntelliJ IDEA, asegurate de que esté seleccionado Java 17, y ejecutá la clase:  ProjectionsDemoApplication.java
-
-📮 Endpoints para Postman
-➤ Obtener resumen de todos los libros
-GET http://localhost:8080/summary
-
-➤ Obtener resumen paginado
-GET http://localhost:8080/summary/page?page=0&size=2
 
 💡 Beneficios del uso de proyecciones
 ✅ Mejora el rendimiento al evitar cargar datos innecesarios
